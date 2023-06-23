@@ -77,19 +77,20 @@ describe('Transactions routes', () => {
       .expect(200)
 
     const transactionId = listTransactionsResponse.body.transactions[0].id
+
     const getTransactionResponse = await request(app.server)
       .get(`/transactions/${transactionId}`)
       .set('Cookie', cookies)
       .expect(200)
 
-    expect(listTransactionsResponse.body.transaction).toEqual([
+    expect(getTransactionResponse.body.transaction).toEqual(
       expect.objectContaining({
         title: 'New transaction',
         amount: 5000,
 
       })
 
-    ])
+    )
 
 
   })
